@@ -10,7 +10,7 @@ function Task(props) {
             <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p className="card-text">Some action</p>
 
-            {props.task.status !== 'todo' &&
+            {props.task.status !== 'backlogs' &&
             <button
                 type="button"
                 className="btn btn-link"

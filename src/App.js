@@ -3,34 +3,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Panel from "./Panel";
 import {useState} from "react";
 
-const statuses = ['todo', 'progress', 'review', 'done']
+const statuses = [ 'backlogs', 'todo', 'progress', 'review', 'done']
 
 const initialTasks = [
-    {
-        id: 1,
-        name: 'Task 1',
-        status: statuses[0],
-        priority: 2
-    },
-    {
-        id: 2,
-        name: 'Task 2',
-        status: statuses[1],
-        priority: 2
-    },
-    {
-        id: 3,
-        name: 'Task 3',
-        status: statuses[2],
-        priority: 2
-    },
-    {
-        id: 4,
-        name: 'Task 4',
-        status: statuses[3],
-        priority: 2
-    }
-]
+
+];
 
 function App() {
 
@@ -70,13 +47,15 @@ function App() {
             <hr/>
             <input type="text" onChange={inputChange} value={inputValue}/>{' '}
             <button type="button" className="btn btn-primary" onClick={addTask}>Add New Task</button>
-            <div className="row align-items-start">
+            <div className="container">
+                <div className='row'>
                 {statuses.map(status => <div key={status} className="col">
                     <Panel status={status}
                            tasks={tasks}
                            left={left}
                            right={right}/>
                 </div>)}
+                </div>
             </div>
         </div>
     );
