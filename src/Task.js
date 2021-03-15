@@ -4,7 +4,8 @@ function Task(props) {
 
       return (
       <div className=''>
-        Task
+        <strong>{props.task.name}</strong> {' '}
+          {props.task.status}
       </div>
   );
 }

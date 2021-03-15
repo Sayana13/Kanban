@@ -15,7 +15,8 @@ function Panel(props) {
       <div className=''>
       <h3 className={`border-bottom border-4 ${colorMap[props.status]} pb-2`}>
           {upperFirst(props.status)}</h3>
-          {props.tasks.map(task => <Task/>)}
+          {props.tasks.filter(task => task.status === props.status)
+              .map(task => <Task task={task}/>)}
       </div>
   );
 }
