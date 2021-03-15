@@ -1,43 +1,55 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Panel from "./Panel";
+import {useState} from "react";
+
+const statuses = ['todo', 'progress', 'review', 'done']
+
+const initialTasks = [
+    {
+        id: 1,
+        name: 'Task 1',
+        status: statuses[0],
+        priority: 2
+    },
+    {
+        id: 2,
+        name: 'Task 2',
+        status: statuses[1],
+        priority: 2
+    },
+    {
+        id: 3,
+        name: 'Task 3',
+        status: statuses[2],
+        priority: 2
+    },
+    {
+        id: 4,
+        name: 'Task 4',
+        status: statuses[3],
+        priority: 2
+    }
+]
 
 function App() {
 
-    const statuses = ['todo', 'progress', 'review', 'done']
+    const [tasks, setTasks] = useState(initialTasks)
 
-    const tasks = [
-        {
-            id: 1,
-            name: 'Task 1',
-            status: statuses[0],
-            priority: 2
-        },
-        {
-            id: 2,
-            name: 'Task 2',
-            status: statuses[1],
-            priority: 2
-        },
-        {
-            id: 3,
-            name: 'Task 3',
-            status: statuses[2],
-            priority: 2
-        },
-        {
-            id: 4,
-            name: 'Task 4',
-            status: statuses[3],
-            priority: 2
-        }
-    ]
-
-    const left = (arg) => {
-        console.log('left', arg)
+    const nextStatus = (currentStatus) => {
+        return statuses[statuses.indexOf(currentStatus) + 1]
     }
-    const right = (arg) => {
-        console.log('right', arg)
+    const prevStatus = (currentStatus) => {
+        return statuses[statuses.indexOf(currentStatus) - 1]
+    }
+
+    const left = (taskId) => {
+        const updateTask = tasks.map(el => el.id === taskId ? {...el, status: prevStatus(el.status)} : el);
+        setTasks(updateTask)
+    }
+    const right = (taskId) => {
+        const updateTask = tasks.map(el => el.id === taskId ? {...el, status: nextStatus(el.status)} : el);
+        setTasks(updateTask)
     }
 
     return (
@@ -49,8 +61,8 @@ function App() {
                 {statuses.map(status => <div key={status} className="col">
                     <Panel status={status}
                            tasks={tasks}
-                    left={left}
-                    right={right}/>
+                           left={left}
+                           right={right}/>
                 </div>)}
             </div>
         </div>
