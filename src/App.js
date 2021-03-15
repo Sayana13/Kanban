@@ -34,7 +34,8 @@ const initialTasks = [
 
 function App() {
 
-    const [tasks, setTasks] = useState(initialTasks)
+    const [tasks, setTasks] = useState(initialTasks);
+    const [inputValue, setInputValue] = useState('');
 
     const nextStatus = (currentStatus) => {
         return statuses[statuses.indexOf(currentStatus) + 1]
@@ -51,12 +52,24 @@ function App() {
         const updateTask = tasks.map(el => el.id === taskId ? {...el, status: nextStatus(el.status)} : el);
         setTasks(updateTask)
     }
+    const addTask = () => {
+        const newTask =
+            {id: Math.random(), name: inputValue, status: statuses[0], priority: 2}
 
+        const newTasks = [...tasks, newTask];
+        setTasks(newTasks);
+        setInputValue('')
+    };
+
+    const inputChange = (e) => {
+        setInputValue(e.target.value);
+    }
     return (
         <div className="Container">
             <h1>Kanban</h1>
             <hr/>
-
+            <input type="text" onChange={inputChange} value={inputValue}/>{' '}
+            <button type="button" className="btn btn-primary" onClick={addTask}>Add New Task</button>
             <div className="row align-items-start">
                 {statuses.map(status => <div key={status} className="col">
                     <Panel status={status}
