@@ -8,26 +8,38 @@ function App() {
 
     const tasks = [
         {
+            id: 1,
             name: 'Task 1',
             status: statuses[0],
             priority: 2
         },
         {
+            id: 2,
             name: 'Task 2',
             status: statuses[1],
             priority: 2
         },
         {
+            id: 3,
             name: 'Task 3',
             status: statuses[2],
             priority: 2
         },
         {
+            id: 4,
             name: 'Task 4',
             status: statuses[3],
             priority: 2
         }
     ]
+
+    const left = (arg) => {
+        console.log('left', arg)
+    }
+    const right = (arg) => {
+        console.log('right', arg)
+    }
+
     return (
         <div className="Container">
             <h1>Kanban</h1>
@@ -35,7 +47,10 @@ function App() {
 
             <div className="row align-items-start">
                 {statuses.map(status => <div key={status} className="col">
-                    <Panel status={status} tasks={tasks}/>
+                    <Panel status={status}
+                           tasks={tasks}
+                    left={left}
+                    right={right}/>
                 </div>)}
             </div>
         </div>

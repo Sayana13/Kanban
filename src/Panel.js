@@ -1,4 +1,4 @@
-import { upperFirst } from "lodash";
+import {upperFirst} from "lodash";
 import Task from "./Task";
 
 
@@ -11,14 +11,22 @@ function Panel(props) {
         review: 'border-warning'
     }
 
-  return (
-      <div className=''>
-      <h3 className={`border-bottom border-4 ${colorMap[props.status]} pb-2`}>
-          {upperFirst(props.status)}</h3>
-          {props.tasks.filter(task => task.status === props.status)
-              .map(task => <Task task={task}/>)}
-      </div>
-  );
+    return (
+        <div className=''>
+            <h3 className={`border-bottom border-4 ${colorMap[props.status]} pb-2`}>
+                {upperFirst(props.status)}</h3>
+            {
+                props.tasks.filter(task => task.status === props.status)
+                    .map(task =>
+                        <Task
+                            key={task.id}
+                            task={task}
+                            left={props.left}
+                            right={props.right}
+                        />)
+            }
+        </div>
+    );
 }
 
 export default Panel;
